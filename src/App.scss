@@ -1,7 +1,21 @@
+// ***** Importing "Inter" font *****
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+// ***** SCSS Variables *****
+$mainColor: #0064EB;
+$backgroundColor: #F9F9F9;
+$whiteColor: #FFFFFF;
+$lighterGrey: #DADADA;
+$darkerGrey: #808080;
+$textColor: #000000;
+$borderRadius: 6px;
+
+// ****** Default styles ******
 html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
+
 
 *, *::before, *::after {
   margin: 0;
@@ -12,4 +26,50 @@ html {
 body {
   width: 100vw;
   height: 100vh;
+  font-family: "Inter", sans-serif;
+  font-size: 1.6rem;
+  color: $textColor;
+  font-weight: 400;
 }
+
+// ***** HEADER *****
+
+.header {
+  background-color: $mainColor;
+  padding: 1.6rem 4rem;
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+
+  .search-form {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: '';
+      top: 50%;
+      left: 2rem;
+      transform: translateY(-50%);
+      height: 14px;
+      width: 14px;
+      background: url('./img/search-icon.svg') center center no-repeat;
+    }
+
+    &__input {
+      padding: .8rem .8rem .8rem 4.4rem;
+      width: 50rem;
+      height: 4rem;
+      font-size: 1.4rem;
+      border-radius: $borderRadius;
+      border: none;
+      outline: none; // No outline in design when focused
+    }
+
+    .github-icon {
+      width: 4rem;
+      height: 4rem;
+      fill: $whiteColor;
+    }
+  }
+}
+
