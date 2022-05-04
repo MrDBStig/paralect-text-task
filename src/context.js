@@ -16,11 +16,16 @@ const AppProvider = ({children}) => {
     } catch (e) {
       console.error(e)
     }
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    fetchData()
   }
 
   return (
-    <AppContext.Provider value={{user, repos, searchQuery, isLoading}}>
+    <AppContext.Provider value={{user, repos, searchQuery, isLoading, setSearchQuery, handleSubmit}}>
       {children}
     </AppContext.Provider>
   )
