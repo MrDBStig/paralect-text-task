@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.scss';
 import Header from "./components/header/header.component";
-import InitialState from "./components/initialState/initialState.component";
+import HomePage from "./pages/homepage/HomePage";
 
 function App() {
-  return (<main>
+  return (<>
     <Header />
-    <InitialState />
-  </main>);
+    <HomePage />
+  </>);
 }
 
 export default App;
