@@ -73,3 +73,23 @@ body {
   }
 }
 
+// ***** INITIAL STATE COMPONENT *****
+.initial-state {
+  padding-top: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4.6rem;
+  max-width: 21rem;
+
+  &__icon {
+    height: 6.4rem;
+    width: 6.4rem;
+  }
+
+  &__text {
+    font-size: 2.2rem;
+    color: $darkerGrey;
+  }
+}
