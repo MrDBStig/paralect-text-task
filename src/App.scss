@@ -1,7 +1,9 @@
 // ***** Importing "Inter" font *****
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 // ***** SCSS Variables *****
+
 $mainColor: #0064EB;
 $backgroundColor: #F9F9F9;
 $whiteColor: #FFFFFF;
@@ -11,6 +13,7 @@ $textColor: #000000;
 $borderRadius: 6px;
 
 // ****** Default styles ******
+
 html {
   box-sizing: border-box;
   font-size: 62.5%;
@@ -104,7 +107,7 @@ a:link, a:visited {
   justify-content: center;
   flex-direction: column;
   gap: 4.6rem;
-  max-width: 21rem;
+  max-width: 25rem;
 
   &__icon {
     height: 6.4rem;
@@ -119,8 +122,10 @@ a:link, a:visited {
 }
 
 // ***** USER COMPONENT *****
+
 .main-screen {
   display: flex;
+  align-items: baseline;
   gap: 8.5rem;
 }
 
@@ -165,5 +170,14 @@ a:link, a:visited {
       gap: 1rem;
     }
   }
+}
 
+// ***** REPOS COMPONENT *****
+
+.empty {
+  width: 100%;
+  //height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
