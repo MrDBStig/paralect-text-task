@@ -4,53 +4,54 @@ import {Octokit} from '@octokit/core';
 const AppContext = React.createContext();
 
 const AppProvider = ({children}) => {
+  // State values
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isError, setIsError] = useState(false);
 
   // Setting up Octokit default parameters
   const octokit = new Octokit({
-    auth: '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',
+    auth: process.env.REACT_APP_GITHUB_API_KEY,
     accept: 'application/vnd.github.v3+json'
   });
 
-  // Function for fetching users
-  const fetchUser = async () => {
-    setIsLoading(true);
-
-    const {data} = await octokit.request('GET /users/{username}', {
-      username: searchQuery,
-    });
-    const {followers, following, login, avatar_url:avatarUrl, name, html_url:htmlUrl} = data;
-
-    setIsLoading(false);
-    return {followers, following, login, avatarUrl, name, htmlUrl}
-  }
-
-  // Function for fetching user repos
-  const fetchRepos = async () => {
-    setIsLoading(true);
-
-    const {data} = await octokit.request('GET /users/{username}/repos', {
-      username: searchQuery,
-    });
-
-    setIsLoading(false);
-    return data;
+  // Function for fetching users and repos
+  const fetchRepos = async (route, options) => {
+    setIsLoading(true)
+    try {
+      const response = await octokit.request(route, options);
+      // console.log(response)
+      if (response.status === 200) {
+        setIsLoading(false)
+        return response.data;
+      }
+    } catch (e) {
+      setIsLoading(false)
+      setIsError(true)
+      return null;
+    }
   }
 
   // Function for control form submit
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const newUser = await fetchUser();
-    const newRepos = await fetchRepos();
-    setUser(newUser);
-    setRepos(newRepos);
+    setIsError(false)
+
+    const newUser = await fetchRepos('GET /users/{username}', {username: searchQuery});
+    const newRepos = await fetchRepos('GET /users/{username}/repos', {username: searchQuery});
+
+    if (newUser) {
+      const {followers, following, login, avatar_url: avatarUrl, name, html_url: htmlUrl} = newUser;
+      setUser({followers, following, login, avatarUrl, name, htmlUrl});
+    }
+
+    if (newRepos) setRepos(newRepos);
   }
 
   return (
-    <AppContext.Provider value={{user, repos, searchQuery, isLoading, setSearchQuery, handleSubmit}}>
+    <AppContext.Provider value={{user, repos, searchQuery, isLoading, isError, setSearchQuery, handleSubmit}}>
       {children}
     </AppContext.Provider>
   )
