@@ -4,10 +4,12 @@ import {Octokit} from '@octokit/core';
 const AppContext = React.createContext();
 
 const AppProvider = ({children}) => {
+  // State values
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isError, setIsError] = useState(false);
 
   // Setting up Octokit default parameters
   const octokit = new Octokit({
@@ -18,12 +20,16 @@ const AppProvider = ({children}) => {
   // Function for fetching users and repos
   const fetchRepos = async (route, options) => {
     setIsLoading(true)
-    const response = await octokit.request(route, options);
-    // console.log(response)
-    setIsLoading(false)
-    if (response.status === 200) {
-      return response.data;
-    } else {
+    try {
+      const response = await octokit.request(route, options);
+      // console.log(response)
+      if (response.status === 200) {
+        setIsLoading(false)
+        return response.data;
+      }
+    } catch (e) {
+      setIsLoading(false)
+      setIsError(true)
       return null;
     }
   }
@@ -31,6 +37,7 @@ const AppProvider = ({children}) => {
   // Function for control form submit
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsError(false)
 
     const newUser = await fetchRepos('GET /users/{username}', {username: searchQuery});
     const newRepos = await fetchRepos('GET /users/{username}/repos', {username: searchQuery});
@@ -44,7 +51,7 @@ const AppProvider = ({children}) => {
   }
 
   return (
-    <AppContext.Provider value={{user, repos, searchQuery, isLoading, setSearchQuery, handleSubmit}}>
+    <AppContext.Provider value={{user, repos, searchQuery, isLoading, isError, setSearchQuery, handleSubmit}}>
       {children}
     </AppContext.Provider>
   )
