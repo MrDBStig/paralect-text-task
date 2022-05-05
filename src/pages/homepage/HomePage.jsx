@@ -5,9 +5,9 @@ import User from "../../components/user/user.component";
 import Repos from "../../components/repos/repos.component";
 
 const HomePage = () => {
-  const {searchQuery, isError} = useGlobalContext()
+  const {searchQuery, isError, user} = useGlobalContext()
 
-  if (!searchQuery) return <InitialState/>
+  if (!searchQuery && !user) return <InitialState/>
 
   if (isError) return <ErrorState/>
 

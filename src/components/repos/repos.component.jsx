@@ -13,7 +13,20 @@ const Repos = () => {
 
   // When user have at least 1 public repo
   if (repos) {
-    return <section className="repos">REPOS</section>;
+    const {publicRepos} = user;
+
+    return <section className="repos">
+      <h2 className="repos__title">Repositories ({publicRepos})</h2>
+      <div className="repos__list">
+        {repos.map(repository => {
+          return <article className="repository" key={repository.id}>
+            <a href={repository.html_url}><h4 className="repository__title">{repository.name}</h4></a>
+            {/* Provides description if it is !== null, else provides name */}
+            <p className="repository__description">{repository.description ? repository.description : repository.name}</p>
+          </article>
+        })}
+      </div>
+    </section>;
   }
 }
 
