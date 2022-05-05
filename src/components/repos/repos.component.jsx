@@ -1,7 +1,9 @@
 import {useGlobalContext} from "../../context";
 
 const Repos = () => {
-  const {repos} = useGlobalContext();
+  const {user, repos} = useGlobalContext();
+
+  if (!repos) return <div>NO REPOS</div>
 
   return <div>REPOS</div>;
 }
