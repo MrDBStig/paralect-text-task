@@ -31,6 +31,7 @@ body {
   color: $textColor;
   font-weight: 400;
   overflow: hidden;
+  background-color: $backgroundColor;
 }
 
 .state {
@@ -41,50 +42,63 @@ body {
   justify-content: center;
 }
 
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+  color: $mainColor;
+}
+
 // ***** HEADER *****
 
 .header {
   background-color: $mainColor;
   padding: 1.6rem 4rem;
-  display: flex;
-  align-items: center;
-  gap: 2.2rem;
 
-  .search-form {
-    position: relative;
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
 
-    &::after {
-      position: absolute;
-      content: '';
-      top: 50%;
-      left: 2rem;
-      transform: translateY(-50%);
-      height: 14px;
-      width: 14px;
-      background: url('./img/search-icon.svg') center center no-repeat;
-    }
+    .search-form {
+      position: relative;
 
-    &__input {
-      padding: .8rem .8rem .8rem 4.4rem;
-      width: 50rem;
-      height: 4rem;
-      font-size: 1.4rem;
-      border-radius: $borderRadius;
-      border: none;
-      outline: none; // No outline in design when focused
-    }
+      &::after {
+        position: absolute;
+        content: '';
+        top: 50%;
+        left: 2rem;
+        transform: translateY(-50%);
+        height: 14px;
+        width: 14px;
+        background: url('./img/search-icon.svg') center center no-repeat;
+      }
 
-    .github-icon {
-      width: 4rem;
-      height: 4rem;
-      fill: $whiteColor;
+      &__input {
+        padding: .8rem .8rem .8rem 4.4rem;
+        width: 50rem;
+        height: 4rem;
+        font-size: 1.4rem;
+        border-radius: $borderRadius;
+        border: none;
+        outline: none; // No outline in design when focused
+      }
+
+      .github-icon {
+        width: 4rem;
+        height: 4rem;
+        fill: $whiteColor;
+      }
     }
   }
 }
 
-// ***** INITIAL STATE COMPONENT *****
+// ***** EMPTY STATE COMPONENT *****
 
-.initial-state {
+.empty-state {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,4 +116,54 @@ body {
     color: $darkerGrey;
     text-align: center;
   }
+}
+
+// ***** USER COMPONENT *****
+.main-screen {
+  display: flex;
+  gap: 8.5rem;
+}
+
+.user {
+  padding-top: 4rem;
+  max-width: 30rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__photo {
+    max-width: 28rem;
+    height: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 2.6rem;
+    line-height: 130%;
+    margin-bottom: 1.2rem;
+  }
+
+  &__link {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  &__follow {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+
+    &--item {
+      font-size: 1.6rem;
+      line-height: 150%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
 }
