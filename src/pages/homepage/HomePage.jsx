@@ -7,7 +7,6 @@ const HomePage = () => {
   if (!searchQuery) return <InitialState />
 
 
-
 }
 
 export default HomePage;
