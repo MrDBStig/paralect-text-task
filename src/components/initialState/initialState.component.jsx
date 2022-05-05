@@ -3,9 +3,9 @@ import svg from '../../img/search-icon.svg'
 const InitialState = () => {
   return (
     <div className="state">
-      <div className="initial-state">
-        <img src={svg} alt="Search icon" className="initial-state__icon"/>
-        <p className="initial-state__text">Start with searching
+      <div className="empty-state">
+        <img src={svg} alt="Search icon" className="empty-state__icon"/>
+        <p className="empty-state__text">Start with searching <br/>
           a GitHub user</p>
       </div>
     </div>

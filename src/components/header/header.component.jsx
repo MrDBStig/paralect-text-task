@@ -6,11 +6,13 @@ const Header = () => {
 
   return (
     <header className="header">
-      <GithubIcon/>
-      <form className="search-form" onSubmit={handleSubmit}>
-        <input type="text" className="search-form__input" value={searchQuery} placeholder="Enter GitHub Username"
-               onChange={(e) => setSearchQuery(e.target.value)}/>
-      </form>
+      <div className="container">
+        <GithubIcon/>
+        <form className="search-form" onSubmit={handleSubmit}>
+          <input type="text" className="search-form__input" value={searchQuery} placeholder="Enter GitHub Username"
+                 onChange={(e) => setSearchQuery(e.target.value)}/>
+        </form>
+      </div>
     </header>
   )
 }
