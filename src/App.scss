@@ -55,6 +55,11 @@ a:link, a:visited {
   color: $mainColor;
 }
 
+::selection {
+  background-color: $mainColor;
+  color: $whiteColor;
+}
+
 // ***** HEADER *****
 
 .header {
@@ -131,7 +136,7 @@ a:link, a:visited {
 
 .user {
   padding-top: 4rem;
-  max-width: 28rem;
+  max-width: 29rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -167,7 +172,7 @@ a:link, a:visited {
       line-height: 150%;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: .8rem;
     }
   }
 }
@@ -210,6 +215,7 @@ a:link, a:visited {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 1.6rem;
 
   &__title {
