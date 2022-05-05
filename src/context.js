@@ -43,17 +43,34 @@ const AppProvider = ({children}) => {
     const newRepos = await fetchRepos('GET /users/{username}/repos', {username: searchQuery});
 
     if (newUser) {
-      const {followers, following, login, avatar_url: avatarUrl, name, html_url: htmlUrl, public_repos: publicRepos} = newUser;
+      const {
+        followers,
+        following,
+        login,
+        avatar_url: avatarUrl,
+        name,
+        html_url: htmlUrl,
+        public_repos: publicRepos
+      } = newUser;
       setUser({followers, following, login, avatarUrl, name, htmlUrl, publicRepos});
     }
 
     if (newRepos) setRepos(newRepos);
-    // setRepos(null)
+  }
+
+  // Utility function for formatting numbers greater than 1000
+  const formatThousand = (num) => {
+    if (num > 1000) {
+      return `${(num / 1000).toFixed(1)}k`;
+    } else {
+      return num;
+    }
   }
 
   // Context Provider
   return (
-    <AppContext.Provider value={{user, repos, searchQuery, isLoading, isError, setSearchQuery, handleSubmit}}>
+    <AppContext.Provider
+      value={{user, repos, page, searchQuery, isLoading, isError, setSearchQuery, formatThousand, handleSubmit}}>
       {children}
     </AppContext.Provider>
   )
