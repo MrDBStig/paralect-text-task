@@ -70,7 +70,7 @@ const AppProvider = ({children}) => {
   // Context Provider
   return (
     <AppContext.Provider
-      value={{user, repos, page, searchQuery, isLoading, isError, setSearchQuery, formatThousand, handleSubmit}}>
+      value={{user, repos, searchQuery, isLoading, isError, setSearchQuery, formatThousand, handleSubmit}}>
       {children}
     </AppContext.Provider>
   )
@@ -78,7 +78,7 @@ const AppProvider = ({children}) => {
 
 // Setting up our custom hook for Context API
 export const useGlobalContext = () => {
-  return useContext(AppContext)
+  return useContext(AppContext);
 }
 
 export {AppContext, AppProvider}
