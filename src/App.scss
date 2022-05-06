@@ -262,4 +262,23 @@ a:link, a:visited {
 
 // ***** PAGINATION COMPONENT *****
 
+.pagination {
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin: 2.4rem 1.4rem;
+  gap: 2.4rem;
+
+  &__info {
+    color: $darkerGrey;
+  }
+
+  &__control,
+  &__numbers {
+    display: flex;
+    gap: 1rem;
+  }
+}
 
