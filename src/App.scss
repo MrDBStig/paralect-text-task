@@ -121,6 +121,7 @@ a:link, a:visited {
 
   &__text {
     font-size: 2.2rem;
+    line-height: 140%;
     color: $darkerGrey;
     text-align: center;
   }
@@ -298,8 +299,13 @@ a:link, a:visited {
 
 .btn {
   font-weight: 700;
+
   &:hover {
     color: $mainColor;
+
+    &:disabled {
+      color: $darkerGrey;
+    }
   }
 }
 
@@ -311,4 +317,111 @@ a:link, a:visited {
 .dots {
   align-self: center;
   font-weight: 700;
+}
+
+// ***** MEDIA QUERIES *****
+@media screen and (max-width: 1240px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .main-screen {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    .empty {
+      margin-top: 10rem;
+    }
+
+    .user {
+      padding-top: 2rem;
+      align-items: center;
+
+      &__photo {
+        max-width: 20rem;
+      }
+
+      &__name, &__link {
+        margin-bottom: 1.5rem;
+      }
+
+      &__follow {
+        gap: 1rem;
+      }
+    }
+
+    .repos {
+      padding-top: 2rem;
+
+      &__title {
+        padding: 0 2rem;
+        font-size: 2.4rem;
+      }
+
+      &__list {
+        padding: 1.5rem;
+
+        .repository {
+          &__title {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .header {
+    padding: 1.6rem;
+
+    .container {
+      .search-form, {
+        width: 100%;
+
+        &__input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .repos {
+    &__list {
+      .repository {
+        padding: 1.8rem 2.4rem;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .main-screen {
+    .user {
+      &__photo {
+        max-width: 16rem;
+        margin-bottom: 1.6rem;
+      }
+    }
+  }
+
+  .pagination {
+    margin: 1.6rem 0;
+    gap: 1rem;
+    flex-direction: column;
+  }
 }
