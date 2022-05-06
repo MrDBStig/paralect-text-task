@@ -10,7 +10,7 @@ const HomePage = () => {
 
   if (isLoading) return <Spinner />
 
-  if (!searchQuery && !user) return <InitialState/>
+  if (!searchQuery || (searchQuery && !user)) return <InitialState/>
 
   if (isError) return <ErrorState/>
 
