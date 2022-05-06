@@ -14,19 +14,17 @@ const Pagination = () => {
       <div className="pagination__numbers">
         {page >= pageCount - 2 && (
           <>
-            <button
-              className={page === 0 ? `pageCard active` : `pageCard`}
-              onClick={() => setPage(0)}
-            >1</button>
-            <div>
-              ...
-            </div>
+            <button className={page === 0 ? `pageItem active` : `pageItem`}
+                    onClick={() => setPage(0)}>
+              1
+            </button>
+            <div className="dots">...</div>
           </>
         )}
         {getPageRange(page, pageCount).map((currentPage) => (
             <button
               key={currentPage}
-              className={currentPage === page ? `pageCard active` : `pageCard`}
+              className={currentPage === page ? `pageItem active` : `pageItem`}
               onClick={(event) => setPage((event.target.textContent - 1))}
             >
               {currentPage + 1}
@@ -34,8 +32,8 @@ const Pagination = () => {
           ))}
         {page < pageCount - 1 && (
           <>
-            <div>...</div>
-            <button className={pageCount === page ? `pageCard active` : `pageCard`}
+            <div className="dots">...</div>
+            <button className={pageCount === page ? `pageItem active` : `pageItem`}
               onClick={() => setPage(pageCount)}>
               {pageCount + 1}
             </button>

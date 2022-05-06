@@ -10,9 +10,9 @@ const HomePage = () => {
 
   if (isLoading) return <Spinner />
 
-  if (!searchQuery || (searchQuery && !user)) return <InitialState/>
-
   if (isError) return <ErrorState/>
+
+  if (!searchQuery || (searchQuery && !user)) return <InitialState/>
 
   return (
     <div className="container main-screen">

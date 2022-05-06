@@ -38,7 +38,7 @@ const AppProvider = ({children}) => {
       setIsError(true)
       return null;
     }
-  }
+  };
 
   // Function for control form submit
   const handleSubmit = async (e) => {
@@ -62,7 +62,7 @@ const AppProvider = ({children}) => {
     }
   }
 
-  // Function for fetch and set repos
+  // Function for fetch and set repos (avoiding double rerender with useCallback)
   const fetchRepos = async () => {
     if (!user) return;
 
@@ -80,13 +80,14 @@ const AppProvider = ({children}) => {
 
   // Fetch repos when user or page changes
   useEffect(() => {
+    if (!user) return;
     fetchRepos();
-  }, [user, page]);
+  }, [page, user]);
 
   // Set repoOffset and endOffset
   useEffect(() => {
-      setRepoOffset(page * REPOS_PER_PAGE + 1);
-      setEndOffset(repoOffset + REPOS_PER_PAGE - 1);
+    setRepoOffset(page * REPOS_PER_PAGE + 1);
+    setEndOffset(repoOffset + REPOS_PER_PAGE - 1);
   }, [REPOS_PER_PAGE, page, repoOffset, repos])
 
   // Create breakpoints for pagination

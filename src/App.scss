@@ -35,14 +35,14 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   background-color: $backgroundColor;
+  position: relative;
 }
 
 .state {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .container {
@@ -270,15 +270,45 @@ a:link, a:visited {
   justify-content: end;
   margin: 2.4rem 1.4rem;
   gap: 2.4rem;
+  color: $darkerGrey;
 
   &__info {
-    color: $darkerGrey;
   }
 
   &__control,
   &__numbers {
     display: flex;
-    gap: 1rem;
+    gap: 1.6rem;
+    color: inherit;
   }
 }
 
+.btn, .pageItem {
+  background-color: transparent;
+  border: none;
+  padding: 1rem;
+  color: inherit;
+  cursor: pointer;
+  border-radius: $borderRadius;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.btn {
+  font-weight: 700;
+  &:hover {
+    color: $mainColor;
+  }
+}
+
+.active {
+  background-color: $mainColor;
+  color: $whiteColor;
+}
+
+.dots {
+  align-self: center;
+  font-weight: 700;
+}
