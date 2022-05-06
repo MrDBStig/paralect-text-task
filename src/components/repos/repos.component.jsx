@@ -21,7 +21,7 @@ const Repos = () => {
         {repos.map((repository) => {
           return (
             <article className="repository" key={repository.id}>
-              <a href={repository.html_url}>
+              <a target='_blank' href={repository.html_url} rel="noreferrer">
                 <h4 className="repository__title">{repository.name}</h4>
               </a>
               {/* Provides repo description if it is !== null, else provides repo name */}
