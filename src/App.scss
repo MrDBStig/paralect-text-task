@@ -55,6 +55,11 @@ a:link, a:visited {
   color: $mainColor;
 }
 
+::-moz-selection {
+  background-color: $mainColor;
+  color: $whiteColor;
+}
+
 ::selection {
   background-color: $mainColor;
   color: $whiteColor;
@@ -144,7 +149,17 @@ a:link, a:visited {
     border-radius: 50%;
     border: 6px solid $darkerGrey;
     border-color: $darkerGrey transparent $darkerGrey transparent;
-    animation: spinner 1.2s linear infinite;
+    -webkit-animation: spinner 1.2s linear infinite;
+            animation: spinner 1.2s linear infinite;
+  }
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
@@ -191,6 +206,7 @@ a:link, a:visited {
     font-size: 1.8rem;
     line-height: 2.2rem;
     margin-bottom: 2.5rem;
+    align-self: flex-start
   }
 
   &__follow {
@@ -246,7 +262,7 @@ a:link, a:visited {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 1.6rem;
 
   &__title {
@@ -268,13 +284,10 @@ a:link, a:visited {
   line-height: 2.1rem;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 2.4rem 1.4rem;
   gap: 2.4rem;
   color: $darkerGrey;
-
-  &__info {
-  }
 
   &__control,
   &__numbers {
@@ -295,10 +308,6 @@ a:link, a:visited {
   &:disabled {
     cursor: default;
   }
-}
-
-.btn {
-  font-weight: 700;
 
   &:hover {
     color: $mainColor;
@@ -309,9 +318,17 @@ a:link, a:visited {
   }
 }
 
+.btn {
+  font-weight: 700;
+}
+
 .active {
   background-color: $mainColor;
   color: $whiteColor;
+
+  &:hover {
+      color: $whiteColor !important;
+    }
 }
 
 .dots {
@@ -391,7 +408,7 @@ a:link, a:visited {
     padding: 1.6rem;
 
     .container {
-      .search-form, {
+      .search-form {
         width: 100%;
 
         &__input {
