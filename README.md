@@ -15,10 +15,14 @@ Features:
 4. Responsive layout for 320px+ width
 5. Server-side pagiantion written from scratch
 6. Code is split into components
+7. Utility function for trimming the number of followers and following if there are more than a 1000
 
 Known issues:
 1. Double re-render while fetching data
-2. User section dissapears and appears with repo section before and after loading repos , even user is already fetched (the con of server-side pagination).
+2. User section dissapears and appears with repo section before and after loading repos , even user is already fetched (the con of server-side pagination)
+3. Bug with the number of repository pages (sometimes it just shows a blank page on the last one)
+
+Yeah, I know, the app is not as ideal as it could be, but its just a test task, not the commercial project. I had so much fun writing it. :)
    
 ## Available Scripts
 
