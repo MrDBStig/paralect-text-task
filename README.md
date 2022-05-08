@@ -8,6 +8,18 @@ Libraries and packages used:
 - Context API
 - Octokit
 
+Features:
+1. Shows loader while fetching data
+2. Shows empty state if user doesn't have any repository
+3. Shows empty state (error) if user doesn't exist
+4. Responsive layout for 320px+ width
+5. Server-side pagiantion written from scratch
+6. Code is split into components
+
+Known issues:
+1. Double re-render while fetching data
+2. User section dissapears and appears with repo section before and after loading repos , even user is already fetched (the con of server-side pagination).
+   
 ## Available Scripts
 
 In the project directory, you can run:
