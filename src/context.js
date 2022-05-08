@@ -1,14 +1,14 @@
-import React, {useState, useContext, useEffect} from "react";
-import {Octokit} from '@octokit/core';
+import React, { useState, useContext, useEffect } from "react";
+import { Octokit } from "@octokit/core";
 
 const AppContext = React.createContext();
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
   // State values
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [isError, setIsError] = useState(false);
 
   // State and variables for pagination
@@ -21,31 +21,33 @@ const AppProvider = ({children}) => {
   // Setting up Octokit default parameters
   const octokit = new Octokit({
     auth: process.env.REACT_APP_GITHUB_API_KEY,
-    accept: 'application/vnd.github.v3+json'
+    accept: "application/vnd.github.v3+json",
   });
 
   // Function for fetching users
   const fetchData = async (route, options) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await octokit.request(route, options);
       if (response.status === 200) {
-        setIsLoading(false)
+        setIsLoading(false);
         return response.data;
       }
     } catch (e) {
-      setIsLoading(false)
-      setIsError(true)
+      setIsLoading(false);
+      setIsError(true);
       return null;
     }
   };
 
   // Function for control form submit
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsError(false)
+    e.preventDefault();
+    setIsError(false);
 
-    const newUser = await fetchData('GET /users/{username}', {username: searchQuery});
+    const newUser = await fetchData("GET /users/{username}", {
+      username: searchQuery,
+    });
 
     if (newUser) {
       const {
@@ -55,14 +57,22 @@ const AppProvider = ({children}) => {
         avatar_url: avatarUrl,
         name,
         html_url: htmlUrl,
-        public_repos: publicRepos
+        public_repos: publicRepos,
       } = newUser;
-      setUser({followers, following, login, avatarUrl, name, htmlUrl, publicRepos});
+      setUser({
+        followers,
+        following,
+        login,
+        avatarUrl,
+        name,
+        htmlUrl,
+        publicRepos,
+      });
       setPage(0);
     }
-  }
+  };
 
-  // Function for fetch and set repos (avoiding double rerender with useCallback)
+  // Function for fetch and set repos
   const fetchRepos = async () => {
     if (!user) return;
 
@@ -70,13 +80,16 @@ const AppProvider = ({children}) => {
       setPage(0);
     }
 
-    const newRepos = await fetchData('GET /users/{username}/repos',
-      {username: searchQuery, per_page: REPOS_PER_PAGE, page: page + 1});
+    const newRepos = await fetchData("GET /users/{username}/repos", {
+      username: searchQuery,
+      per_page: REPOS_PER_PAGE,
+      page: page + 1,
+    });
     if (newRepos) setRepos(newRepos);
 
     const pages = Math.floor(user.publicRepos / REPOS_PER_PAGE);
     setPageCount(pages);
-  }
+  };
 
   // Fetch repos when user or page changes
   useEffect(() => {
@@ -88,7 +101,7 @@ const AppProvider = ({children}) => {
   useEffect(() => {
     setRepoOffset(page * REPOS_PER_PAGE + 1);
     setEndOffset(repoOffset + REPOS_PER_PAGE - 1);
-  }, [REPOS_PER_PAGE, page, repoOffset, repos])
+  }, [REPOS_PER_PAGE, page, repoOffset, repos]);
 
   // Create breakpoints for pagination
   const getPageRange = (currentPage, pageCount) => {
@@ -124,7 +137,7 @@ const AppProvider = ({children}) => {
     } else {
       return num;
     }
-  }
+  };
 
   // Context Provider
   return (
@@ -144,16 +157,17 @@ const AppProvider = ({children}) => {
         formatThousand,
         handleSubmit,
         getPageRange,
-        setPage
-      }}>
+        setPage,
+      }}
+    >
       {children}
     </AppContext.Provider>
-  )
-}
+  );
+};
 
 // Setting up our custom hook for Context API
 export const useGlobalContext = () => {
   return useContext(AppContext);
-}
+};
 
-export {AppContext, AppProvider}
+export { AppContext, AppProvider };
