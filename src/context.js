@@ -87,7 +87,15 @@ const AppProvider = ({ children }) => {
     });
     if (newRepos) setRepos(newRepos);
 
-    const pages = Math.floor(user.publicRepos / REPOS_PER_PAGE);
+    let pages = Math.floor(user.publicRepos / REPOS_PER_PAGE);
+
+    // A small fix if user has public repos number multiple of 4 (4, 8, 12, 16 etc.)
+    if (user.publicRepos % REPOS_PER_PAGE === 0) {
+      // For example, user has 4 public repos. pageCount in that case would be equal to 2. We able to avoid that by setting
+      pages = pages - 1;
+      // And if user has any number of public repos that is different than a multiple of 4, we don't make any change to pageCount. :)
+    }
+
     setPageCount(pages);
   };
 
