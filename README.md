@@ -20,9 +20,13 @@ Features:
 Known issues:
 1. Double re-render while fetching data
 2. User section dissapears and appears with repo section (app shows loading spinner at that moment) before and after loading repos , even user is already fetched (the con of server-side pagination)
-3. Bug with the number of repository pages (sometimes it just shows a blank page on the last one)
+3. ~~Bug with the number of repository pages (sometimes it just shows a blank page on the last one)~~
+   Fixed: see lines 92-97 in context.js
 
-Yeah, I know, the app is not as ideal as it could be, but its just a test task, not the commercial project. I had so much fun writing it. :)
+Yeah, I know, the app is not as ideal as it could be, but its just a test task, not the commercial project. I had so much fun writing it. 
+The best thing I've found about programming is the fact that some time after you've build the application you can find yourself sitting and thinking how would you build the app now. And there is always a different approach that you've already done. :)
+
+P.S. I tried to follow DRY and KISS principles but now I uderstand that even such a small app requires a structure.So, if I needed to complete this task now, I would rather used Redux or at least useReducer() hook with ContextAPI. :D
    
 ## Available Scripts
 
