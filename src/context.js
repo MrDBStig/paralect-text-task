@@ -7,7 +7,7 @@ const AppProvider = ({ children }) => {
   // State values
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
-  const [repos, setRepos] = useState(null);
+  const [repos, setRepos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isError, setIsError] = useState(false);
 
