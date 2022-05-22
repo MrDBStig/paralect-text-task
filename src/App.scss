@@ -377,6 +377,10 @@ a:link, a:visited {
         margin-bottom: 1.5rem;
       }
 
+      &__link {
+        align-self: center
+      }
+
       &__follow {
         gap: 1rem;
       }
